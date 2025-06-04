@@ -1,33 +1,42 @@
 import express from "express";
 import { generateFakeProducts } from "./utils/fakeData";
 import { Product } from "./interfaces";
+import ProductController from "./controllers/productController";
 const app = express();
 
 app.use(express.json());
 
 const fakeProduct = generateFakeProducts();
 
+
+const productController = new ProductController(fakeProduct)
+
 app.get("/products", (req, res) => {
-  const querParams = req.query.filter as string;
 
-  if (querParams) {
-    const filteredParams = querParams.split(",");
+   res.send(productController.getProduct());
 
-    let filteredProducts = [];
-    filteredProducts = fakeProduct.map((product) => {
-      const filteredProduct: any = {};
-      filteredParams.forEach((properity) => {
-        if (product.hasOwnProperty(properity as keyof Product)) {
-          filteredProduct[properity] = product[properity as keyof Product];
-        }
-      });
-      console.log(filteredProduct);
-      return { id: product.id, ...filteredProduct };
-    });
-    res.send(filteredProducts);
-  }
 
-  res.send(fakeProduct);
+  // const querParams = req.query.filter as string;
+
+  // if (querParams) {
+  //   const filteredParams = querParams.split(",");
+
+  //   let filteredProducts = [];
+  //   filteredProducts = fakeProduct.map((product) => {
+  //     const filteredProduct: any = {};
+  //     filteredParams.forEach((properity) => {
+  //       if (product.hasOwnProperty(properity as keyof Product)) {
+  //         filteredProduct[properity] = product[properity as keyof Product];
+  //       }
+  //     });
+  //     console.log(filteredProduct);
+  //     return { id: product.id, ...filteredProduct };
+  //   });
+  //   res.send(filteredProducts);
+  // }
+
+  // res.send(fakeProduct);
+
 });
 
 app.get("/products/:id", (req, res) => {
