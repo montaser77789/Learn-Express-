@@ -2,19 +2,20 @@ import express from "express";
 import { generateFakeProducts } from "./utils/fakeData";
 import { Product } from "./interfaces";
 import ProductController from "./controllers/productController";
+import { ProductService } from "./services/ProductService";
 const app = express();
 
 app.use(express.json());
 
+
+
 const fakeProduct = generateFakeProducts();
+const productService = new ProductService(fakeProduct);
 
-
-const productController = new ProductController(fakeProduct)
+const productController = new ProductController(productService);
 
 app.get("/products", (req, res) => {
-
-   res.send(productController.getProduct());
-
+  res.send(productController.getProduct());
 
   // const querParams = req.query.filter as string;
 
@@ -36,7 +37,6 @@ app.get("/products", (req, res) => {
   // }
 
   // res.send(fakeProduct);
-
 });
 
 app.get("/products/:id", (req, res) => {
