@@ -75,6 +75,21 @@ class ProductController {
       res.status(404).send(filterProduct);
     }
   }
+
+  renderProduct (req : Request , res : Response){
+    res.render("products" , {
+    productTitle : "Prodct Title PAge ",
+    products : this.productServices.findAll()
+  });
+  }
+  renderProductPage(req : Request , res : Response){
+        const PRODUCT_ID = +req.params.id;
+
+
+    res.render("singleProduct" , {
+      product : this.productServices.getProductById(PRODUCT_ID)
+    })
+  }
 }
 
 export default ProductController;

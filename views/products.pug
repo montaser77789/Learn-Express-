@@ -4,4 +4,20 @@ html(lang="en")
         title Products
     body 
     .container
-        h1.page-title Product Page
+        h1.page-title= productTitle
+        .product-grid
+            each product in products
+                .product-info
+                    .product-text
+                        a(href=`product/${product.id}`)
+                            h2= product.title
+                        p=  product.description
+                    .product-price-btn
+                        span= product.price
+                        | $
+                        button(type='button') buy now
+
+
+
+
+
