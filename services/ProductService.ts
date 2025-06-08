@@ -1,5 +1,4 @@
 import { Product } from "../interfaces";
-import { generateFakeProducts } from "../utils/fakeData";
 // ** servies => Storage data
 
 type productBody = {
