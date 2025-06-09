@@ -2,17 +2,22 @@
   "scripts": {
     "dev": "nodemon server.ts",
     "start": "node dist/server.js",
-    "build": "tsc -p ."
+    "build": "tsc -p .",
+    "build:css" : "postcss public/styles/tailwind.css -o  public/styles/global.css"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
     "express": "^5.1.0",
     "nodemon": "^3.1.10",
+    "postcss": "^8.5.4",
     "pug": "^3.0.3",
+    "tailwindcss": "^4.1.8",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   },
   "devDependencies": {
     "@faker-js/faker": "^9.8.0",
-    "@types/express": "^5.0.2"
+    "@types/express": "^5.0.2",
+    "postcss-cli": "^11.0.1"
   }
 }

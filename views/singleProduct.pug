@@ -2,7 +2,7 @@ doctype html
 html(lang="en")
     head
         link(rel="stylesheet", href="/styles/global.css")
-        title `product - ${product.id}`
+        title= `product - ${product.id}`
     body 
-    h1= product.title
+    h1.bg-red-500= product.title
     p= product.description
