@@ -1,17 +1,14 @@
-doctype html
-html(lang="en")
-    head
-        link(rel="stylesheet", href="/styles/global.css")
-        title `product - ${product.id}`
-    body 
-        .m-10.mx-4.max-w-screen-lg.overflow-hidden.rounded-xl.border.shadow-lg(class='md:pl-8')
-            .flex.flex-col.overflow-hidden.bg-white(class='sm:flex-row md:h-80')
-                .flex.w-full.flex-col.p-4(class='sm:w-1/2 sm:p-8 lg:w-3/5')
-                    h2.text-xl.font-bold.text-gray-900(class='md:text-2xl lg:text-4xl')= product.title
-                    p.mt-4.mb-8.max-w-md.text-gray-500= product.description
-                    a.group.mt-auto.flex.w-44.cursor-pointer.select-none.items-center.justify-center.rounded-md.bg-black.px-6.py-2.text-white.transition(href='#')
-                        span.group.flex.w-full.items-center.justify-center.rounded.py-1.text-center.font-bold  Shop now 
-                    svg.flex-0.ml-4.h-6.w-0.transition-all(class='group-hover:w-6' xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke='currentColor' stroke-width='2')
-                    path(stroke-linecap='round' stroke-linejoin='round' d='M14 5l7 7m0 0l-7 7m7-7H3')
-                .order-first.ml-auto.h-48.w-full.bg-gray-700(class='sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5')
-                    img.h-full.w-full.object-cover(src=`${product.imageURL}`)
+extends layout/_base
+
+block content 
+    .m-10.mx-4.overflow-hidden.rounded-xl.border.shadow-lg(class='md:pl-8')
+        .flex.flex-col.overflow-hidden.bg-white(class='sm:flex-row md:h-80')
+            .flex.w-full.flex-col.p-4(class='sm:w-1/2 sm:p-8 lg:w-3/5')
+                h2.text-xl.font-bold.text-gray-900(class='md:text-2xl lg:text-4xl')= product.title
+                p.mt-4.mb-8.max-w-md.text-gray-500= product.description
+                a.group.mt-auto.flex.w-44.cursor-pointer.select-none.items-center.justify-center.rounded-md.bg-black.px-6.py-2.text-white.transition(href='#')
+                    span.group.flex.w-full.items-center.justify-center.rounded.py-1.text-center.font-bold  Shop now 
+                svg.flex-0.ml-4.h-6.w-0.transition-all(class='group-hover:w-6' xmlns='http://www.w3.org/2000/svg' fill='none' viewbox='0 0 24 24' stroke='currentColor' stroke-width='2')
+                path(stroke-linecap='round' stroke-linejoin='round' d='M14 5l7 7m0 0l-7 7m7-7H3')
+            .order-first.ml-auto.h-48.w-full.bg-gray-700(class='sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5')
+                img.h-full.w-full.object-cover(src=`${product.imageURL}`)
