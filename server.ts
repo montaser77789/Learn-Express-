@@ -4,6 +4,8 @@ import path from "path";
 import { generateFakeProducts } from "./utils/fakeData";
 import { ProductService } from "./services/ProductService";
 import ProductController from "./controllers/productController";
+import productRouter from "./router/product";
+import ProductControllerView from "./controllers/productControllerView";
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
@@ -14,32 +16,35 @@ const fakeProduct = generateFakeProducts();
 const productService = new ProductService(fakeProduct);
 
 const productController = new ProductController(productService);
+const productControllerView = new ProductControllerView(productService);
 
 app.get("/", (req, res) => {
   res.render("index");
 });
 
-app.get("/products", (req, res) => productController.renderProduct(req, res));
+app.get("/products", productControllerView.renderProduct);
 
-app.get("/product/:id" , (req,res) => productController.renderProductPage(req,res))
+app.get("/product/:id", productControllerView.renderProductPage);
 
-app.get("/api/products", (req, res) => productController.getProduct(req, res));
+// app.get("/api/products", (req, res) => productController.getProduct(req, res));
 
-app.get("/api/products/:id", (req, res) =>
-  productController.getProductById(req, res)
-);
+// app.post("/api/products", (req, res) =>
+//   productController.createProduct(req, res)
+// );
+app.use("/api/products", productRouter);
 
-app.post("/api/products", (req, res) =>
-  productController.createProduct(req, res)
-);
-// ** update Product using patch
-app.patch("/api/products/:id", (req, res) =>
-  productController.updateProduct(req, res)
-);
-// ** DELETE Product
-app.delete("/api/products/:id", (req, res) =>
-  productController.deleteProduct(req, res)
-);
+// app.get("/api/products/:id", (req, res) =>
+//   productController.getProductById(req, res)
+// );
+
+// // ** update Product using patch
+// app.patch("/api/products/:id", (req, res) =>
+//   productController.updateProduct(req, res)
+// );
+// // ** DELETE Product
+// app.delete("/api/products/:id", (req, res) =>
+//   productController.deleteProduct(req, res)
+// );
 
 const PORT: number = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

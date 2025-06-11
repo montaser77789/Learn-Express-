@@ -1,9 +1,10 @@
 extends layout/_base.pug
 block content
+
     .container.m-auto
-        .grid.grid-cols-4.gap-2.mt-8
+        div.grid(class="grid-cols-1 md:grid-cols-3 gap-2 mt-8 m-auto")
             each product in products
-                .group.flex.w-full.max-w-xs.flex-col.self-center.overflow-hidden.rounded-lg.border.bg-gray-700.shadow-md(class='border-gray-100/30')
+                .group.flex.w-full.flex-col.self-center.overflow-hidden.rounded-lg.border.bg-gray-700.shadow-md(class='border-gray-100/30')
                     a.relative.mx-3.mt-3.flex.h-60.overflow-hidden.rounded-xl(href=`/product/${product.id}`)
                         img.peer.absolute.top-0.right-0.h-full.w-full.object-cover(src=`${product.imageURL}`)
                         svg.pointer-events-none.absolute.inset-x-0.bottom-5.mx-auto.text-3xl.text-white.transition-opacity(class='group-hover:animate-ping group-hover:opacity-30 peer-hover:opacity-0' xmlns='http://www.w3.org/2000/svg' aria-hidden='true' role='img' width='1em' height='1em' preserveaspectratio='xMidYMid meet' viewbox='0 0 32 32')

@@ -2,10 +2,18 @@ import { Request, Response } from "express";
 import { ProductService } from "../services/ProductService";
 
 class ProductController {
-  constructor(private productServices: ProductService) {}
+  constructor(private productServices: ProductService) {
+    this.getProduct = this.getProduct.bind(this)
+    this.getProductById = this.getProductById.bind(this)
+    this.createProduct = this.createProduct.bind(this)
+    this.updateProduct = this.updateProduct.bind(this)
+    this.deleteProduct = this.deleteProduct.bind(this)
+  }
+
 
   getProduct(req: Request, res: Response) {
     const querParams = req.query.filter as string;
+    console.log(querParams , )
     if (querParams) {
       res.send(this.productServices.filterQuery(querParams));
     }
@@ -76,20 +84,7 @@ class ProductController {
     }
   }
 
-  renderProduct (req : Request , res : Response){
-    res.render("products" , {
-    productTitle : "Prodct Title PAge ",
-    products : this.productServices.findAll()
-  });
-  }
-  renderProductPage(req : Request , res : Response){
-        const PRODUCT_ID = +req.params.id;
 
-
-    res.render("singleProduct" , {
-      product : this.productServices.getProductById(PRODUCT_ID)
-    })
-  }
 }
 
 export default ProductController;
