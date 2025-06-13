@@ -12,6 +12,7 @@ class ProductController {
 
 
   getProduct(req: Request, res: Response) {
+    throw new Error("Something went Error 🤷‍♀️")
     const querParams = req.query.filter as string;
     console.log(querParams , )
     if (querParams) {

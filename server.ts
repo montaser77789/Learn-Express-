@@ -3,19 +3,22 @@ const app = express();
 import path from "path";
 import { generateFakeProducts } from "./utils/fakeData";
 import { ProductService } from "./services/ProductService";
-import ProductController from "./controllers/productController";
 import productRouter from "./router/product";
 import ProductControllerView from "./controllers/productControllerView";
+import ErrorMiddleware from "./middlewares/Error";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
+
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 const fakeProduct = generateFakeProducts();
 const productService = new ProductService(fakeProduct);
 
-const productController = new ProductController(productService);
 const productControllerView = new ProductControllerView(productService);
 
 app.get("/", (req, res) => {
@@ -45,6 +48,8 @@ app.use("/api/products", productRouter);
 // app.delete("/api/products/:id", (req, res) =>
 //   productController.deleteProduct(req, res)
 // );
+
+app.use(ErrorMiddleware.handle);
 
 const PORT: number = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
