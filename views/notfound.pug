@@ -1,0 +1,10 @@
+extends layout/_base
+block content 
+    section.flex.items-center.h-screen.p-16.bg-gray-50(class='dark:bg-gray-700')
+        .container.flex.flex-col.items-center
+            .flex.flex-col.gap-6.max-w-md.text-center
+                h2.font-extrabold.text-9xl.text-gray-600(class='dark:text-gray-100')
+                    span.sr-only Error
+                    | 404
+                p.text-2xl(class='md:text-3xl dark:text-gray-300') Sorry, we couldn&apos;t find this page.
+                a.px-8.py-4.text-xl.font-semibold.rounded.bg-purple-600.text-gray-50(href='#' class='hover:text-gray-200') Back to home

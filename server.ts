@@ -7,6 +7,7 @@ import productRouter from "./router/product";
 import ProductControllerView from "./controllers/productControllerView";
 import ErrorMiddleware from "./middlewares/Error";
 import dotenv from "dotenv";
+import NotfoundMiddleware from "./middlewares/Notfound";
 
 dotenv.config();
 
@@ -50,6 +51,7 @@ app.use("/api/products", productRouter);
 // );
 
 app.use(ErrorMiddleware.handle);
+app.use(NotfoundMiddleware.handle);
 
 const PORT: number = 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

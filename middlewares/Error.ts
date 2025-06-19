@@ -8,6 +8,15 @@ export default class ErrorMiddleware {
         err: err.message,
         stack: process.env.NODE_ENV === "development" ? err.stack : null,
       });
+      return;
     }
+
+    res.status(500).render("error", {
+      message: "Internal server error !",
+      err: err.message,
+      stack: process.env.NODE_ENV === "development" ? err.stack : null,
+    });
+
+
   }
 }
